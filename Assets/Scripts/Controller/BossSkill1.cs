@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using static BossManager;
 public class BossSkill1 : MonoBehaviour
 {
     private static BossSkill1 _instance;
@@ -24,6 +24,9 @@ public class BossSkill1 : MonoBehaviour
     Skill1Beats[] Beat = new Skill1Beats[100];
     int startpos;
     int intervalp;
+
+    BossManager bm;
+
     public void StartCount(int len,Skill1Beats[] beats)
     {
         length = len;
@@ -31,16 +34,7 @@ public class BossSkill1 : MonoBehaviour
         nowpos=0;
         flag=0;
         intervalp = 40;
-        if (len % 2 == 1)
-        {
-            int tmp = (len - 1) / 2;
-            startpos = -tmp * intervalp;
-        }
-        else
-        {
-            int tmp = len / 2 - 1;
-            startpos = -tmp * intervalp - intervalp / 2;
-        }
+        startpos = -160;
         EventMgr.Instance.AddListener("BEAT!",CreateBox);
     }
 
@@ -58,20 +52,51 @@ public class BossSkill1 : MonoBehaviour
         {
             flag = 0;
             Vector3 v = new Vector3(startpos+462.5f,140+198.0f,0);
-            startpos += intervalp;
+            startpos += intervalp*Beat[nowpos].interval;
             UIRoot.Instance.init("Prefabs","DefendBeat","FunctionLayer",nowpos);
             UIRoot.Instance.MoveSon("FunctionLayer","DefendBeat",nowpos, "Point",v);
             nowpos++;
             if(nowpos == length)
             {
+                flag = 0;
+                nowpos = 0;
                 EventMgr.Instance.RemoveListener("BEAT!",CreateBeat);
+                ToolMgr.Instance.wait(5,StartAttack);
             }
         }
     }
 
-    public void StartAttack()
-    {
 
+
+    public void StartAttack(string event_name, object udata)
+    {
+        UIRoot.Instance.uninit("Box",0);
+        for(int i = 0;i<length;i++)
+        {
+            UIRoot.Instance.uninit("DefendBeat",i);
+        }
+        EventMgr.Instance.AddListener("BEAT!",Attack);
+        EventMgr.Instance.RemoveListener("BEAT!",StartAttack);
+    }
+
+    void Attack(string event_name, object udata)
+    {
+        flag++;
+        if(flag == Beat[nowpos].interval)
+        {
+            flag = 0;
+            //
+            BossOp op  = new BossOp();
+            op.operation =BossManager.op.SKILL1;
+            bm.bossadd(op);
+            nowpos++;
+            if(nowpos == length)
+            {
+                flag = 0;
+                nowpos = 0;
+                EventMgr.Instance.RemoveListener("BEAT!",Attack);
+            }
+        }
     }
 
     void Awake() {
@@ -81,5 +106,7 @@ public class BossSkill1 : MonoBehaviour
         }
         _instance = this;
         DontDestroyOnLoad(this.gameObject);
+        bm = this.gameObject.GetComponent<BossManager>();
     }
+    
 }

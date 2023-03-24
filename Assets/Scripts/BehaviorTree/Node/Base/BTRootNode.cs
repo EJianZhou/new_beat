@@ -9,6 +9,7 @@ namespace BTtry.AI
         public bool isStop = false;
         public override NodeState Tick()
         {
+            Debug.Log("Root");
             var childNode = children[currentChild].Tick();
             while (true)
             {

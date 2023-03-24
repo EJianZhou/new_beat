@@ -6,8 +6,19 @@ using UnityEngine;
 public enum BossTransition
 {
     NullTansition,
-    AttackToIdle,
-    IdleToAttack
+
+    Attack1ToIdle,
+    Attack2ToIdle,
+    Attack3ToIdle,
+    Attack4ToIdle,
+    Attack5ToIdle,
+
+    IdleToAttack1,
+    IdleToAttack2,
+    IdleToAttack3,
+    IdleToAttack4,
+    IdleToAttack5
+
 }
 
 //状态的ID
@@ -15,7 +26,11 @@ public enum BossStateID
 {
     NullState,
     Idle,
-    Attack
+    Attack1,
+    Attack2,
+    Attack3,
+    Attack4,
+    Attack5
 }
 /// <summary>
 /// 此类表示有限状态系统中的状态。
@@ -84,7 +99,7 @@ public abstract class BossState
     public virtual void DoBeforeEntering() { }
     public virtual void DoBeforeLeaving() { }
 
-    public abstract void Reason();
+    public abstract void Reason(BossStateID bsID);
     public abstract void Act();
 
 }

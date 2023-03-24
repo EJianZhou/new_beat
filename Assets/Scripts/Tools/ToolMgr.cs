@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static EventMgr;
 
 public class ToolMgr : MonoBehaviour
 {
@@ -39,4 +40,25 @@ public class ToolMgr : MonoBehaviour
         float ret = ((float)x)/ten;
         return ret;
     }
+
+    int waittime=0;
+    int flag = 0;
+    event_handler h;
+    public void wait(int x,event_handler eh)
+    {
+        waittime = x;
+        h=eh;
+        EventMgr.Instance.AddListener("BEAT!",Count);
+    }
+
+    void Count(string event_name, object udata)
+    {
+        flag++;
+        if(flag==waittime)
+        {
+            EventMgr.Instance.RemoveListener("BEAT!",Count);
+            EventMgr.Instance.AddListener("BEAT!",h);
+        }
+    }
+
 }

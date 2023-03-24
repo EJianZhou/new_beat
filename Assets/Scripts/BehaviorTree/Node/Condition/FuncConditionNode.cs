@@ -13,6 +13,7 @@ public class FuncConditionNode : BTConditionNode
     }
     public override NodeState Tick()
     {
+        Debug.Log("condition");
         if (m_function!=null)
         {
             return (m_function.Invoke()) ? NodeState.Success : NodeState.Failure;

@@ -101,11 +101,11 @@ public class TimeCounter : MonoBehaviour
                 Debug.Log(111);
                 pm.playerupdate(ops[i]);
             }
-            /*else if(refs[i].obType == ObjectType.Boss)
+            else if(refs[i].obType == ObjectType.Boss)
             {
-                BossManager bm = bossDic[obj];
+                BossManager bm = bossDic[i];
                 bm.bossupdate();
-            }*/
+            }
         }
     }
 

@@ -14,8 +14,12 @@ public class BossIdleState : BossState
         mPlayer.Idle();
     }
 
-    public override void Reason()
+    public override void Reason(BossStateID bsID)
     {
-        mFSM.PerformTransition(BossTransition.IdleToAttack);
+        if (bsID == BossStateID.Attack1) mFSM.PerformTransition(BossTransition.IdleToAttack1);
+        if (bsID == BossStateID.Attack2) mFSM.PerformTransition(BossTransition.IdleToAttack2);
+        if (bsID == BossStateID.Attack3) mFSM.PerformTransition(BossTransition.IdleToAttack3);
+        if (bsID == BossStateID.Attack4) mFSM.PerformTransition(BossTransition.IdleToAttack4);
+        if (bsID == BossStateID.Attack5) mFSM.PerformTransition(BossTransition.IdleToAttack5);
     }
 }

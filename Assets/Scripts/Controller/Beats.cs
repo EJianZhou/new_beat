@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Beatsgame;
 using UnityEngine;
 using static BossSkill1;
 
@@ -74,14 +75,14 @@ public class Beats : MonoBehaviour
         {
             if (flag == 4)
             {
-                EventMgr.Instance.Emit("BossAttack", null);   
+                //EventMgr.Instance.Emit("BossAttack", null);   
                 flag = 0;
             }
             else flag++;
         }
         if (count == 17 && flag == 1)
         {
-            EventMgr.Instance.Emit("BossIdle", null);
+            //EventMgr.Instance.Emit("BossIdle", null);
         }
         if (count == 20)
         {
@@ -132,7 +133,8 @@ public class Beats : MonoBehaviour
         }
         if (count > 25)
         {
-            EventMgr.Instance.Emit("BEAT!",null);
+            ROperation rop = (ROperation)udata;
+            EventMgr.Instance.Emit("BEAT!",rop.Frame);
             count = 1;
         }
     }

@@ -134,7 +134,6 @@ public class UIRoot : MonoBehaviour
             else if(tmp.ops == 4)
             {
                 GameObject go = maps[tmp.nickname];
-                Debug.Log("POSITION:" + "UIRoot/LayerRoot/" + tmp.layer + "/" + tmp.nickname + "/" + tmp.son);
                 Transform son = go.transform.Find(tmp.son);
                 son.position=tmp.v;
             }

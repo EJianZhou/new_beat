@@ -9,6 +9,7 @@ namespace BTtry.AI
     {
         public override NodeState Tick()
         {
+            Debug.Log("sequential");
             var childNode = children[currentChild].Tick();
             switch (childNode)
             {

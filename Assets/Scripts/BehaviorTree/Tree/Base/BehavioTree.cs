@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BTtry.AI
 {
-    public abstract class BehavioTree 
+    public abstract class BehavioTree:MonoBehaviour
     {
         protected BTRootNode mRoot;
         protected virtual void Start()

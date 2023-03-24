@@ -10,7 +10,7 @@ public class BallController : MonoBehaviour
     void Start()
     {
         go = this.gameObject;
-        Skill1Beats[] sb = new Skill1Beats[100];
+        /*Skill1Beats[] sb = new Skill1Beats[100];
         sb[0].interval=3;
         sb[0].type=1;
         sb[1].interval = 1;
@@ -19,7 +19,7 @@ public class BallController : MonoBehaviour
         sb[2].type = 1;
         sb[3].interval = 1;
         sb[3].type = 1;
-        BossSkill1.Instance.StartCount(4,sb);
+        BossSkill1.Instance.StartCount(4,sb);*/
     }
 
     // Update is called once per frame

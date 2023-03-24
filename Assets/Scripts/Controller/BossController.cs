@@ -14,18 +14,43 @@ public class BossController : MonoBehaviour
         Debug.Log(1);
         MakeFSM();
         manimstor = GetComponent<Animator>();
-        attackHash = Animator.StringToHash("Attack");
-        EventMgr.Instance.AddListener("BossAttack", IdleToAttack);
-        EventMgr.Instance.AddListener("BossIdle", AttackToIdle);
+        EventMgr.Instance.AddListener("BossAttack1", ToAttack1);
+        EventMgr.Instance.AddListener("BossIdle", ToIdle);
     }
-    void IdleToAttack(string event_name, object udata)
+    void ToAttack1(string event_name, object udata)
     {
-        if (mFsmSystem.CurrentState.StateID==BossStateID.Idle) mFsmSystem.CurrentState.Reason();
+        Debug.Log("切换到攻击");
+        if (mFsmSystem.CurrentState.StateID==BossStateID.Idle) mFsmSystem.CurrentState.Reason(BossStateID.Idle);
     }
 
-    void AttackToIdle(string event_name, object udata)
+    void ToAttack2(string event_name, object udata)
     {
-        if (mFsmSystem.CurrentState.StateID == BossStateID.Attack) mFsmSystem.CurrentState.Reason();
+        if (mFsmSystem.CurrentState.StateID == BossStateID.Idle) mFsmSystem.CurrentState.Reason(BossStateID.Idle);
+    }
+
+    void ToAttack3(string event_name, object udata)
+    {
+        if (mFsmSystem.CurrentState.StateID == BossStateID.Idle) mFsmSystem.CurrentState.Reason(BossStateID.Idle);
+    }
+
+    void ToAttack4(string event_name, object udata)
+    {
+        if (mFsmSystem.CurrentState.StateID == BossStateID.Idle) mFsmSystem.CurrentState.Reason(BossStateID.Idle);
+    }
+
+    void ToAttack5(string event_name, object udata)
+    {
+        if (mFsmSystem.CurrentState.StateID == BossStateID.Idle) mFsmSystem.CurrentState.Reason(BossStateID.Idle);
+    }
+
+    void ToIdle(string event_name, object udata)
+    {
+        if (mFsmSystem.CurrentState.StateID == BossStateID.Attack1) mFsmSystem.CurrentState.Reason(BossStateID.Attack1);
+        if (mFsmSystem.CurrentState.StateID == BossStateID.Attack2) mFsmSystem.CurrentState.Reason(BossStateID.Attack2);
+        if (mFsmSystem.CurrentState.StateID == BossStateID.Attack3) mFsmSystem.CurrentState.Reason(BossStateID.Attack3);
+        if (mFsmSystem.CurrentState.StateID == BossStateID.Attack4) mFsmSystem.CurrentState.Reason(BossStateID.Attack4);
+        if (mFsmSystem.CurrentState.StateID == BossStateID.Attack5) mFsmSystem.CurrentState.Reason(BossStateID.Attack5);
+
     }
 
 
@@ -34,8 +59,6 @@ public class BossController : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log("update");
-        //Debug.Log(mFsmSystem.CurrentState);
         mFsmSystem.refresh(beats);
     }
 
@@ -44,40 +67,79 @@ public class BossController : MonoBehaviour
         mFsmSystem = new BossFSM();
 
         BossIdleState bossIdleState = new BossIdleState(mFsmSystem, this);
-        bossIdleState.AddTransition(BossTransition.IdleToAttack, BossStateID.Attack);
+        bossIdleState.AddTransition(BossTransition.IdleToAttack1, BossStateID.Attack1);
+        bossIdleState.AddTransition(BossTransition.IdleToAttack2, BossStateID.Attack2);
+        bossIdleState.AddTransition(BossTransition.IdleToAttack3, BossStateID.Attack3);
+        bossIdleState.AddTransition(BossTransition.IdleToAttack4, BossStateID.Attack4);
+        bossIdleState.AddTransition(BossTransition.IdleToAttack5, BossStateID.Attack5);
 
-        BossAttackState bossAttackState = new BossAttackState(mFsmSystem, this);
-        bossAttackState.AddTransition(BossTransition.AttackToIdle, BossStateID.Idle);
+        BossAttack1State bossAttack1State = new BossAttack1State(mFsmSystem, this);
+        bossAttack1State.AddTransition(BossTransition.Attack1ToIdle, BossStateID.Idle);
+
+        BossAttack2State bossAttack2State = new BossAttack2State(mFsmSystem, this);
+        bossAttack2State.AddTransition(BossTransition.Attack2ToIdle, BossStateID.Idle);
+
+        BossAttack3State bossAttack3State = new BossAttack3State(mFsmSystem, this);
+        bossAttack3State.AddTransition(BossTransition.Attack3ToIdle, BossStateID.Idle);
+
+        BossAttack4State bossAttack4State = new BossAttack4State(mFsmSystem, this);
+        bossAttack4State.AddTransition(BossTransition.Attack4ToIdle, BossStateID.Idle);
+
+        BossAttack5State bossAttack5State = new BossAttack5State(mFsmSystem, this);
+        bossAttack5State.AddTransition(BossTransition.Attack5ToIdle, BossStateID.Idle);
 
         mFsmSystem.AddState(bossIdleState);
-        mFsmSystem.AddState(bossAttackState);
+        mFsmSystem.AddState(bossAttack1State);
+        mFsmSystem.AddState(bossAttack2State);
+        mFsmSystem.AddState(bossAttack3State);
+        mFsmSystem.AddState(bossAttack4State);
+        mFsmSystem.AddState(bossAttack5State);
+
+
+
+
 
         Debug.Log(1);
 
 
     }
 
-    public void Attack()
+    public void Attack1()
     {
-        manimstor.Play("Attack");
-        //Debug.Log("播放攻击动画....");
+        manimstor.Play("Attack1");
+        Debug.Log("播放Boss攻击动画1....");
     }
+
+    public void Attack2()
+    {
+        manimstor.Play("Attack2");
+        Debug.Log("播放Boss攻击动画2....");
+    }
+
+    public void Attack3()
+    {
+        manimstor.Play("Attack3");
+        Debug.Log("播放Boss攻击动画3....");
+    }
+
+    public void Attack4()
+    {
+        manimstor.Play("Attack4");
+        Debug.Log("播放Boss攻击动画4....");
+    }
+
+    public void Attack5()
+    {
+        manimstor.Play("Attack5");
+        Debug.Log("播放Boss攻击动画5....");
+    }
+
+
 
     public void Idle()
     {
         manimstor.Play("Idle");
-        //Debug.Log("播放 Idle 动画中....");
-        /*if (manimstor.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
-        {
-            manimstor.Play("Idle");
-            Debug.Log("播放 Idle 动画中....");
-        }
-        if (manimstor.GetCurrentAnimatorStateInfo(0).fullPathHash == attackHash) Debug.Log(1);
-        if (manimstor.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f) Debug.Log(2);*/
-
+        Debug.Log("播放 Boss Idle 动画中....");
     }
-
-
-
 
 }
