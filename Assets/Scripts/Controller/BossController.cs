@@ -20,36 +20,36 @@ public class BossController : MonoBehaviour
     void ToAttack1(string event_name, object udata)
     {
         Debug.Log("切换到攻击");
-        if (mFsmSystem.CurrentState.StateID==BossStateID.Idle) mFsmSystem.CurrentState.Reason(BossStateID.Idle);
+        if (mFsmSystem.CurrentState.StateID==BossStateID.Idle) mFsmSystem.CurrentState.Reason(BossStateID.Attack1);
     }
 
     void ToAttack2(string event_name, object udata)
     {
-        if (mFsmSystem.CurrentState.StateID == BossStateID.Idle) mFsmSystem.CurrentState.Reason(BossStateID.Idle);
+        if (mFsmSystem.CurrentState.StateID == BossStateID.Idle) mFsmSystem.CurrentState.Reason(BossStateID.Attack2);
     }
 
     void ToAttack3(string event_name, object udata)
     {
-        if (mFsmSystem.CurrentState.StateID == BossStateID.Idle) mFsmSystem.CurrentState.Reason(BossStateID.Idle);
+        if (mFsmSystem.CurrentState.StateID == BossStateID.Idle) mFsmSystem.CurrentState.Reason(BossStateID.Attack3);
     }
 
     void ToAttack4(string event_name, object udata)
     {
-        if (mFsmSystem.CurrentState.StateID == BossStateID.Idle) mFsmSystem.CurrentState.Reason(BossStateID.Idle);
+        if (mFsmSystem.CurrentState.StateID == BossStateID.Idle) mFsmSystem.CurrentState.Reason(BossStateID.Attack4);
     }
 
     void ToAttack5(string event_name, object udata)
     {
-        if (mFsmSystem.CurrentState.StateID == BossStateID.Idle) mFsmSystem.CurrentState.Reason(BossStateID.Idle);
+        if (mFsmSystem.CurrentState.StateID == BossStateID.Idle) mFsmSystem.CurrentState.Reason(BossStateID.Attack5);
     }
 
     void ToIdle(string event_name, object udata)
     {
-        if (mFsmSystem.CurrentState.StateID == BossStateID.Attack1) mFsmSystem.CurrentState.Reason(BossStateID.Attack1);
-        if (mFsmSystem.CurrentState.StateID == BossStateID.Attack2) mFsmSystem.CurrentState.Reason(BossStateID.Attack2);
-        if (mFsmSystem.CurrentState.StateID == BossStateID.Attack3) mFsmSystem.CurrentState.Reason(BossStateID.Attack3);
-        if (mFsmSystem.CurrentState.StateID == BossStateID.Attack4) mFsmSystem.CurrentState.Reason(BossStateID.Attack4);
-        if (mFsmSystem.CurrentState.StateID == BossStateID.Attack5) mFsmSystem.CurrentState.Reason(BossStateID.Attack5);
+        if (mFsmSystem.CurrentState.StateID == BossStateID.Attack1) mFsmSystem.CurrentState.Reason(BossStateID.Idle);
+        if (mFsmSystem.CurrentState.StateID == BossStateID.Attack2) mFsmSystem.CurrentState.Reason(BossStateID.Idle);
+        if (mFsmSystem.CurrentState.StateID == BossStateID.Attack3) mFsmSystem.CurrentState.Reason(BossStateID.Idle);
+        if (mFsmSystem.CurrentState.StateID == BossStateID.Attack4) mFsmSystem.CurrentState.Reason(BossStateID.Idle);
+        if (mFsmSystem.CurrentState.StateID == BossStateID.Attack5) mFsmSystem.CurrentState.Reason(BossStateID.Idle);
 
     }
 
@@ -59,6 +59,7 @@ public class BossController : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(mFsmSystem.CurrentState.StateID);
         mFsmSystem.refresh(beats);
     }
 
