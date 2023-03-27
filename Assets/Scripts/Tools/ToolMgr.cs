@@ -48,6 +48,7 @@ public class ToolMgr : MonoBehaviour
     {
         waittime = x;
         h=eh;
+        flag=0;
         EventMgr.Instance.AddListener("BEAT!",Count);
     }
 

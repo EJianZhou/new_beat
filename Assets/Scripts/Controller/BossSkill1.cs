@@ -29,6 +29,7 @@ public class BossSkill1 : MonoBehaviour
 
     public void StartCount(int len,Skill1Beats[] beats)
     {
+        Debug.Log("HELLO?");
         length = len;
         Beat = beats;
         nowpos=0;
@@ -51,13 +52,14 @@ public class BossSkill1 : MonoBehaviour
         if(flag == Beat[nowpos].interval)
         {
             flag = 0;
-            Vector3 v = new Vector3(startpos+462.5f,140+198.0f,0);
             startpos += intervalp*Beat[nowpos].interval;
+            Vector3 v = new Vector3(startpos+462.5f,140+198.0f,0);
             UIRoot.Instance.init("Prefabs","DefendBeat","FunctionLayer",nowpos);
             UIRoot.Instance.MoveSon("FunctionLayer","DefendBeat",nowpos, "Point",v);
             nowpos++;
             if(nowpos == length)
             {
+                Debug.Log("HELLOHELLO");
                 flag = 0;
                 nowpos = 0;
                 EventMgr.Instance.RemoveListener("BEAT!",CreateBeat);
@@ -70,13 +72,13 @@ public class BossSkill1 : MonoBehaviour
 
     public void StartAttack(string event_name, object udata)
     {
+        EventMgr.Instance.AddListener("BEAT!",Attack);
+        EventMgr.Instance.RemoveListener("BEAT!",StartAttack);
         UIRoot.Instance.uninit("Box",0);
         for(int i = 0;i<length;i++)
         {
             UIRoot.Instance.uninit("DefendBeat",i);
         }
-        EventMgr.Instance.AddListener("BEAT!",Attack);
-        EventMgr.Instance.RemoveListener("BEAT!",StartAttack);
     }
 
     void Attack(string event_name, object udata)
