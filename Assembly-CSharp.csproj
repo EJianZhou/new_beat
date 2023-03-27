@@ -554,6 +554,7 @@
      <None Include="Assets\Fantasy Skybox FREE\Readme.txt" />
      <None Include="Assets\Scripts\Physics\FixedMath.Net\LICENSE.txt" />
      <None Include="Assets\KUBIKOS - World\URP Support\Shaders URP\Magma_Shader.shader" />
+     <None Include="Assets\Shader\BeatRing.shader" />
      <None Include="Assets\KUBIKOS - World\Shaders\Sun_Shader.shader" />
      <None Include="Assets\Hovl Studio\Resources\Shaders\DissolveNoise.shader" />
      <None Include="Assets\Fantasy Skybox FREE\ReleaseNotes.txt" />

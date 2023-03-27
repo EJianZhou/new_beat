@@ -10,14 +10,6 @@ public class PlayerController : MonoBehaviour
 {
     public uint id;
     public GameObject obj;
-    private static PlayerController _instance;
-    public static PlayerController Instance
-    {
-        get
-        {
-            return _instance;
-        }
-    }
     public float speed = 1;
     float time = 0;
     public float x,y,z;
@@ -30,7 +22,6 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        _instance = this;  
         Vector3 pos = this.gameObject.transform.position;
         x = pos.x;
         y = pos.y;
