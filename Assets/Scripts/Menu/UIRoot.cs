@@ -77,6 +77,15 @@ public class UIRoot : MonoBehaviour
         q.Enqueue(tmp);
     }
 
+    public void StopRingCount(string name,int id)
+    {
+        node tmp = new node();
+        tmp.ops = 5;
+        tmp.name = name;
+        tmp.nickname = name+id.ToString();
+        q.Enqueue(tmp);
+    }
+
     struct node
     {
         public int ops;
@@ -136,6 +145,14 @@ public class UIRoot : MonoBehaviour
                 GameObject go = maps[tmp.nickname];
                 Transform son = go.transform.Find(tmp.son);
                 son.position=tmp.v;
+            }
+            else if(tmp.ops == 5)
+            {
+                if(maps.ContainsKey(tmp.nickname))
+                {
+                    RingController RC=maps[tmp.nickname].GetComponent<RingController>();
+                    RC.stopcount();
+                }
             }
         }
     }

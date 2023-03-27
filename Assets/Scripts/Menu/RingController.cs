@@ -39,7 +39,7 @@ public class RingController : MonoBehaviour
             EventMgr.Instance.RemoveListener("ROperation",doupdate);
             UIRoot.Instance.uninit("Ring",0);
         }
-        if(nowtime<times)
+        if(st>100)
         {
             st-=speed;
             nowtime++;

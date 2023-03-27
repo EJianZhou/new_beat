@@ -52,7 +52,12 @@ public class PlayerManager : MonoBehaviour
                 }
                 else if(nowstatus.operation == PlayerManager.op.ATTACK)
                 {
-                    if(nowstatus.attid==4)break;
+                    if(nowstatus.attid==4)//玩家在第四下攻击后又按了第五下，删除ring
+                    {
+                        Debug.Log("??????????????");
+                        UIRoot.Instance.StopRingCount("Ring",0);
+                        break;
+                    }
                     if(nowstatus.st==status.START)
                     {
                         ;
@@ -62,13 +67,21 @@ public class PlayerManager : MonoBehaviour
                         op.attid = nowstatus.attid+1;
                         int sta = nowstatus.attUAC;
                         op.attUAC = sta+13+5;
-                        real_update(sta,op,13,5,23);
+                        if(op.attid==4)//第四下攻击放入队列
+                        {
+                            real_update(sta,op,13,5,75);
+                        }
+                        else real_update(sta,op,13,5,23);
                     }
                     else if(nowstatus.st==status.UNACTIVE)
                     {
                         op.attid = nowstatus.attid+1;
                         op.attUAC = frame+13+5;
-                        real_update(frame,op,13,5,23);
+                        if(op.attid==4)//第四下攻击放入队列
+                        {
+                            real_update(frame,op,13,5,75);
+                        }
+                        else real_update(frame,op,13,5,23);
                     }
                 }
                 //TODO
@@ -114,6 +127,10 @@ public class PlayerManager : MonoBehaviour
                         //EventMgr.Instance.Emit("PlayerIdle"+op.playerid.ToString(), null);
                         Debug.Log("DIUPlayerAttack"+op.attid.ToString()+op.playerid.ToString());
                         EventMgr.Instance.Emit("PlayerAttack"+op.attid.ToString()+op.playerid.ToString(), null);
+                        if(op.attid==4)
+                        {
+                            ToolMgr.Instance.RingCount(1);//第四下攻击开始处理，1Beat
+                        }
                         break;
                     case status.ACTIVE:
                         nowstatus.st=status.ACTIVE;
