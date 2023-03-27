@@ -82,6 +82,7 @@
      <Compile Include="Assets\Scripts\Manager\IDMgr.cs" />
      <Compile Include="Assets\Scripts\Manager\PhysicManager.cs" />
      <Compile Include="Assets\Scripts\Menu\Generate.cs" />
+     <Compile Include="Assets\Scripts\Menu\RingController.cs" />
      <Compile Include="Assets\Scripts\Menu\StartGame.cs" />
      <Compile Include="Assets\Scripts\Menu\UIRoot.cs" />
      <Compile Include="Assets\Scripts\Net\RecvFromServer.cs" />
@@ -554,7 +555,7 @@
      <None Include="Assets\Fantasy Skybox FREE\Readme.txt" />
      <None Include="Assets\Scripts\Physics\FixedMath.Net\LICENSE.txt" />
      <None Include="Assets\KUBIKOS - World\URP Support\Shaders URP\Magma_Shader.shader" />
-     <None Include="Assets\Shader\BeatRing.shader" />
+     <None Include="Assets\Shader\BeatInnerRing.shader" />
      <None Include="Assets\KUBIKOS - World\Shaders\Sun_Shader.shader" />
      <None Include="Assets\Hovl Studio\Resources\Shaders\DissolveNoise.shader" />
      <None Include="Assets\Fantasy Skybox FREE\ReleaseNotes.txt" />

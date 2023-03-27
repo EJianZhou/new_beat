@@ -62,4 +62,16 @@ public class ToolMgr : MonoBehaviour
         }
     }
 
+    int ringtime=2;
+    public void RingCount(int x)
+    {
+        ringtime = x;
+        UIRoot.Instance.init("Prefabs","Ring","FunctionLayer",0);
+    
+    }
+
+    public int GetRingTime()
+    {
+        return ringtime;
+    }
 }
