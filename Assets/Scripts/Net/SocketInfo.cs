@@ -14,7 +14,6 @@ using System;
 public class SocketInfo : MonoBehaviour
 {
     private static SocketInfo _instance;
-    public bool isdebug = true;
     public static SocketInfo Instance
     {
         get
@@ -38,7 +37,7 @@ public class SocketInfo : MonoBehaviour
         }
         _instance = this;
         DontDestroyOnLoad(this.gameObject);
-        RecvFromServer.Connection("10.0.150.37", isdebug ? NetConfig.DEBUG_PORT : NetConfig.SERVER_PORT);
+        RecvFromServer.Connection("10.0.150.37", 2438);
         
     }
     public static void CloseSocket()

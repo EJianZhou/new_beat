@@ -14,7 +14,7 @@ using System;
 
 public class RecvFromServer
 {
-    public static int HEAD_SIZE = 9;
+    public static int HEAD_SIZE = 4;
     public static int HEAD_OFFSET = 16;
     private static int offset = 0;
     private static int MAX_BUFFER_SIZE = 1 << 16;
@@ -43,7 +43,7 @@ public class RecvFromServer
             {
                 int bodySize = 0;
                 int bodyType = -1;
-                int playerid = 0;
+
                 offset += bytesReceive;
 
                 if (offset >= HEAD_SIZE)
@@ -51,10 +51,8 @@ public class RecvFromServer
                     try
                     {
                         byte[] head = GetResponseHeader(buffer, HEAD_SIZE);
-                        bodySize = (int)((head[0] & 0xFF) | ((head[1] & 0xFF) << 8) | ((head[2] & 0xFF) << 16) | ((head[3] & 0xFF) << 24));
-                        playerid = (int)((head[4] & 0xFF) | ((head[5] & 0xFF) << 8) | ((head[6] & 0xFF) << 16) | ((head[7] & 0xFF) << 24));
-                        bodyType = (int)head[8] & 0xFF;
-
+                        bodySize = (int)((head[0] & 0xFF) | ((head[1] & 0xFF) << 8) | ((head[2] & 0xFF) << 16));
+                        bodyType = (int)head[3]&0xFF;
                     }
                     catch (Exception ex)
                     {
@@ -68,14 +66,14 @@ public class RecvFromServer
                         return;
                     }
                 }
-
+                
                 // 处理包体
-                while (bodySize > 0 && offset >= bodySize + HEAD_SIZE)
+                while (bodySize > 0 && offset >= bodySize+HEAD_SIZE)
                 {
                     // 当前包的包体
                     Debug.Log(bodyType);
                     Debug.Log(bodySize);
-                    byte[] body = GetResponseBody(buffer, bodySize);
+                    byte[] body = GetResponseBody(buffer, bodySize);  
                     if (bodyType == 2)
                     {
                         // Login Response
@@ -83,10 +81,6 @@ public class RecvFromServer
                         {
                             RLogin rLogin = new RLogin();
                             rLogin.MergeFrom(body, 0, bodySize);
-                            if (rLogin.Success == 1)
-                            {
-                                IDMgr.Instance.playerID = rLogin.Id;
-                            }
                             EventMgr.Instance.Emit("RLogin", rLogin);
                         }
                         catch (Exception ex)
@@ -184,7 +178,7 @@ public class RecvFromServer
                     offset -= bodySize;
                     bodySize = 0;
                     bodyType = -1;
-                    playerid = 0;
+
                     // 因为会粘包，所以要继续判断后面是否有包
 
                     if (offset >= HEAD_SIZE)
@@ -192,10 +186,8 @@ public class RecvFromServer
                         try
                         {
                             byte[] head = GetResponseHeader(buffer, HEAD_SIZE);
-                            bodySize = (int)((head[0] & 0xFF) | ((head[1] & 0xFF) << 8) | ((head[2] & 0xFF) << 16) | ((head[3] & 0xFF) << 24));
-                            playerid = (int)((head[4] & 0xFF) | ((head[5] & 0xFF) << 8) | ((head[6] & 0xFF) << 16) | ((head[7] & 0xFF) << 24));
-                            bodyType = (int)head[8] & 0xFF;
-
+                            bodySize = (int)((head[0] & 0xFF) | ((head[1] & 0xFF) << 8) | ((head[2] & 0xFF) << 16));
+                            bodyType = (int)head[3] & 0xFF;
                         }
                         catch (Exception ex)
                         {
