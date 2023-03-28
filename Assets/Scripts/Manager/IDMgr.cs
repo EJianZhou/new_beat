@@ -23,7 +23,7 @@ public class IDMgr : MonoBehaviour
     }
     // Update is called once per frame
     public uint id;
-
+    public uint playerID { get;set; }
     public void set_id(uint x)
     {
         id=x;

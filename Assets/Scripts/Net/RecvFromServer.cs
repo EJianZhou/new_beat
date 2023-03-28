@@ -83,6 +83,10 @@ public class RecvFromServer
                         {
                             RLogin rLogin = new RLogin();
                             rLogin.MergeFrom(body, 0, bodySize);
+                            if (rLogin.Success == 1)
+                            {
+                                IDMgr.Instance.playerID = rLogin.Id;
+                            }
                             EventMgr.Instance.Emit("RLogin", rLogin);
                         }
                         catch (Exception ex)

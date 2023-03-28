@@ -26,7 +26,7 @@ public class SendToServer
         Byte[] msgType = new Byte[1];
         int len = login.CalculateSize();
         msgLen = intToBytes(len, 4);
-        msgId = intToBytes((int)IDMgr.Instance.get_id(), 4);
+        msgId = intToBytes((int)IDMgr.Instance.playerID, 4);
         msgType = intToBytes(NetConfig.LOGIN, 1);
         msgLen.CopyTo(sendMsg, 0);
         msgId.CopyTo(sendMsg, 4);
@@ -44,7 +44,7 @@ public class SendToServer
         Byte[] msgType = new Byte[1];
         int len = match.CalculateSize();
         msgLen = intToBytes(len, 4);
-        msgId = intToBytes((int)IDMgr.Instance.get_id(), 4);
+        msgId = intToBytes((int)IDMgr.Instance.playerID, 4);
         msgType = intToBytes(NetConfig.MATCH, 1);
         msgLen.CopyTo(sendMsg, 0);
         msgId.CopyTo(sendMsg, 4);
@@ -63,7 +63,7 @@ public class SendToServer
         Byte[] msgType = new Byte[1];
         int len = operation.CalculateSize();
         msgLen = intToBytes(len, 4);
-        msgId = intToBytes((int)IDMgr.Instance.get_id(), 4);
+        msgId = intToBytes((int)IDMgr.Instance.playerID, 4);
         msgType = intToBytes(NetConfig.OPERATION, 1);
         msgLen.CopyTo(sendMsg, 0);
         msgId.CopyTo(sendMsg, 4);
@@ -83,7 +83,7 @@ public class SendToServer
         Byte[] msgType = new Byte[1];
         int len = exitgame.CalculateSize();
         msgLen = intToBytes(len, 4);
-        msgId = intToBytes((int)IDMgr.Instance.get_id(), 4);
+        msgId = intToBytes((int)IDMgr.Instance.playerID, 4);
         msgType = intToBytes(1, 1);
         msgLen.CopyTo(sendMsg, 0);
         msgId.CopyTo(sendMsg, 4);

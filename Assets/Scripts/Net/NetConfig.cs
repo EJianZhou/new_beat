@@ -17,4 +17,6 @@ public class NetConfig
     public static int REXITGAME = 9;
     public static int OP = 10;
     public static int COMMAND = 11;
+
+    public static int SERVER_PORT = 2435;
 }

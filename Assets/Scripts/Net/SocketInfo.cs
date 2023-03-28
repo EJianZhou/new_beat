@@ -37,7 +37,7 @@ public class SocketInfo : MonoBehaviour
         }
         _instance = this;
         DontDestroyOnLoad(this.gameObject);
-        RecvFromServer.Connection("10.0.150.37", 2435);
+        RecvFromServer.Connection("10.0.150.37", NetConfig.SERVER_PORT);
         
     }
     public static void CloseSocket()
