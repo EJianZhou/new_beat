@@ -19,4 +19,5 @@ public class NetConfig
     public static int COMMAND = 11;
 
     public static int SERVER_PORT = 2435;
+    public static int DEBUG_PORT = 2440;
 }

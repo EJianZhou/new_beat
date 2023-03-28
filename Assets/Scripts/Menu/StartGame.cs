@@ -14,14 +14,23 @@ public class StartGame : MonoBehaviour
         pack.Password = "admin";
         SendToServer.AddMsgToQueue(pack);
         SendToServer.SendMsgQueue();
-        EventMgr.Instance.AddListener("RLogin", onMessageBack);
+        EventMgr.Instance.AddListener(SocketInfo.Instance.isdebug ? "REnter" : "RLogin", onMessageBack);
     }
 
     void onMessageBack(string event_name, object data)
     {
         EventMgr.Instance.RemoveListener(event_name, onMessageBack);
         UIRoot.Instance.uninit("MainMenu", 0);
-      //  UIRoot.Instance.TurnTo(1);
-        UIRoot.Instance.init("Prefabs", "GameLobby", "FunctionLayer", 0);
-    }
+        if (event_name == "REnter")
+        {
+            UIRoot.Instance.TurnTo(1);
+        }
+        else if (event_name == "RLogin")
+        {
+            UIRoot.Instance.init("Prefabs", "GameLobby", "FunctionLayer", 0);
+        } else
+        {
+            Debug.Log($"unknow event : {event_name}");
+        }
+     }
 }
