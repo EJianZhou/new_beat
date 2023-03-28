@@ -7,6 +7,6 @@ public class Generate : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        UIRoot.Instance.init("Prefabs","MainMenu","FunctionLayer",0);
+        UIRoot.Instance.init("Prefabs", "MainMenu", "FunctionLayer", 0);
     }
 }
