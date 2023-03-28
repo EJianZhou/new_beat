@@ -14,12 +14,14 @@ public class StartGame : MonoBehaviour
         pack.Password = "admin";
         SendToServer.AddMsgToQueue(pack);
         SendToServer.SendMsgQueue();
-        EventMgr.Instance.AddListener(SocketInfo.Instance.isdebug ? "REnter" : "RLogin", onMessageBack);
+        EventMgr.Instance.AddListener("RLogin", onMessageBack);
+        EventMgr.Instance.AddListener("REnter", onMessageBack);
     }
 
     void onMessageBack(string event_name, object data)
     {
-        EventMgr.Instance.RemoveListener(event_name, onMessageBack);
+        EventMgr.Instance.RemoveListener("RLogin", onMessageBack);
+        EventMgr.Instance.RemoveListener("REnter", onMessageBack);
         UIRoot.Instance.uninit("MainMenu", 0);
         if (event_name == "REnter")
         {
