@@ -66,15 +66,10 @@ public class ToolMgr : MonoBehaviour
     public void RingCount(int x)
     {
         ringtime = x;
-        EventMgr.Instance.AddListener("BEAT!",initRing);
-        
+        UIRoot.Instance.init("Prefabs","Ring","FunctionLayer",0);
     
     }
-    private void initRing(string event_name,object udata)
-    {
-        EventMgr.Instance.RemoveListener("BEAT!",initRing);
-        UIRoot.Instance.init("Prefabs","Ring","FunctionLayer",0);
-    }
+
     public int GetRingTime()
     {
         return ringtime;
